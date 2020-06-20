@@ -1,0 +1,56 @@
+table {
+  border-collapse: collapse;
+  /*border: 1px solid black;*/
+  margin: 20px;
+}
+
+th, td {
+  padding: 5px 10px;
+  border: 1px solid black;
+  
+}
+td.right {
+  text-align: right;
+}
+th, td {
+  text-align: left;
+}
+td.empty {
+  border: none;
+}
+a {
+  text-decoration: none;
+  color: navy;
+}
+
+div.list-head {
+  margin: 20px;
+  border: 1px solid black;
+  font-weight: bold;
+  max-width: 600px;
+}
+
+.table table {
+  margin: 0 20px;
+}
+
+.table {
+  display: none;
+}
+
+#bbperfs tr td:nth-child(3) {
+  max-width: 450px;
+}
+
+#bbperfs {
+  font-family: Georgia;
+}
+
+div.graph {
+  margin-bottom: 30px;
+  height: 400px;
+}
+
+fieldset {
+  display: inline-block;
+}

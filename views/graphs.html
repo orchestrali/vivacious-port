@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bellboard performance data</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div id="nums">
+      <label for="query">Query: </label>
+      <textarea id="query" rows="3" cols="33"></textarea>
+      <label for="mindate">Min year: </label>
+      <input id="minyear" type="number" />
+      <button type="button" id="butt">
+      submit
+      </button>
+    </div>
+    
+    <div id="container" class="empty graph"></div>
+    
+    <div id="nums2">
+      <label for="year">Generate method pie chart for year: </label>
+      <input id="year" type="number" />
+      <label for="num">Max methods to label: </label>
+      <input id="num" type="number" />
+      <fieldset>
+        <legend>Type</legend>
+        <input type="radio" id="methods" name="type" checked/>
+        <label for="methods">Methods</label>
+        <input type="radio" id="variations" name="type" />
+        <label for="variations">Variations</label>
+        <input type="radio" id="both" name="type" />
+        <label for="both">Both</label>
+      </fieldset>
+      <button type="button" id="yearbutt">
+      submit
+      </button>
+    </div>
+    
+    <div id="pie-container" class="graph">
+      
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js" type="text/javascript"></script>
+    <script src="/graphs.js" type="text/javascript"></script>
+  </body>
+</html>
