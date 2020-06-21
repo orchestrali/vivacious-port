@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Change Ringing Methods Database</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <p>
+      This app has read-only access to a set of change-ringing-related MongoDB collections. Documents in a MongoDB collection look more or less like javascript objects, making them easy to work with in web apps.
+    </p>
+    <p>
+      The primary collection is of change-ringing methods and is updated weekly from another app. Here is an example method from the MongoDB collection:
+      <pre><code>
+        {
+          "classification":{
+            "trebleDodging":true,
+            "little":false,
+            "differential":false,
+            "plain":false
+          },
+          "oldtitle":[],
+          "huntBells":[1],
+          "huntPath":[1,2,1,2,3,4,3,4,5,6,5,6,7,8,7,8,8,7,8,7,6,5,6,5,4,3,4,3,2,1,2,1],
+          "stationaryBells":[],
+          "pbOrder":[[2,3,5,7,8,6,4]],
+          "symmetry":["palindromic"],
+          "pnFull":[[3,4],"x",[3,4],[1,8],"x",[1,2],"x",[1,8],"x",[1,2],"x",[1,8],"x",[1,2],"x",[1,8],"x",[1,2],"x",[1,8],"x",[1,2],"x",[1,8],"x",[1,2],"x",[1,8],[3,4],"x",[3,4],[1,8]],
+          "calls":["5d116300c1b7323f7a33b943"],
+          "performances":["5ee855b4a0c0ea00aef1b547","5ee855b4a0c0ea00aef1b548"],
+          "_id":"5d2d5cbced71425508c7fa07",
+          "leadHeadCode":"m",
+          "leadHead":"14263857",
+          "fchGroups":"BDa",
+          "ccNum":26308,
+          "title":"Kent Treble Bob Major",
+          "name":"Kent",
+          "pn":"34-34.18-12-18-12-18-12-18,18",
+          "stage":8,
+          "class":"Treble Bob",
+          "leadLength":32,
+          "numHunts":1,
+          "leadtruth":true,
+          "coursetruth":true,
+          "numWorking":7,
+          "leadsInCourse":7,
+          "__v":0
+        }
+      </code></pre>
+    
+      Much of this information comes directly from the CCCBR's xml method collection, including title, name, class, classification, pn (place notation in abbreviated format), leadHead, fchGroups, numHunts, leadLength, and symmetry. "oldtitle", which is empty here, contains any earlier names for a method, particularly those which were changed when the new Framework was adopted. I've had to add these by hand so they may not be complete. "pbOrder" is an array of arrays each containing a working place bell cycle. A differential or short-course method would have multiple inner arrays; since Kent is neither there is only one inner array. "pnFull" is an array containing the unabbreviated place notation, with arrays of place numbers for changes that include places and the string "x" for cross. "calls" and "performances" are arrays containing Mongo IDs of records in other database collections. The calls are somewhat experimental; the performances are only those included in the CCCBR xml files—mostly first peals of methods. "_id" is the record's ID in this collection. "ccNum" is the method's ID on Composition Library. Method urls on complib take the form <code>https://complib.org/method/$ID</code>, so Kent Treble Bob Major can be found at <a href="https://complib.org/method/26308">https://complib.org/method/26308</a>.
+    </p>
+  
+    <p>
+      To search the methods collection using this app, send a GET request as in the following examples:
+    </p>
+  <table>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/methods" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/methods</a></td><td>Find all methods in the collection</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/method" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/method</a></td><td>Find one method in the collection</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/methods?stage=5" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/methods?stage=5</a></td><td>Find all doubles methods in the collection (all methods with a stage of 5)</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/method?stage=5" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/method?stage=5</a></td><td>Find one doubles method in the collection</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/methods?title=Buckfastleigh+Surprise+Major" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/methods?title=Buckfastleigh+Surprise+Major</a></td><td>Find all methods in the collection with title "Buckfastleigh Surprise Major." Since method titles are all unique, this should only return one result, but it will be in an array. This is a case-sensitive search.</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/method?title=Buckfastleigh+Surprise+Major" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/method?title=Buckfastleigh+Surprise+Major</a></td><td>Find one method in the collection with title "Buckfastleigh Surprise Major". This results in a single object not in an array.</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/methods?stage=6&class=Principle" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/methods?stage=6&class=Principle</a></td><td>Find all minor principles in the collection. Classes are also case sensitive.</td></tr>
+    <tr><td><a href="https://vivacious-port.glitch.me/find/methods?stage=6&class=Bob&symmetry=palindromic" target="_blank" rel="noreferrer noopener">https://vivacious-port.glitch.me/find/methods?stage=6&class=Bob&symmetry=palindromic</a></td><td>Find all minor Bob methods with palindromic symmetry in the collection. These methods may also have the other two symmetry types—since the value of "symmetry" is an array, this search only looks for arrays that contain "palindromic".</td></tr>
+  </table>
+  
+  <p>
+    Replacing "find" with "count" (and "methods" with "method", singular) in the above searches will return the number of matching methods.
+  </p>
+  
+  <p>
+    All MongoDB query operators are available as well, discussed at <a href="https://docs.mongodb.com/manual/reference/operator/query/" target="_blank" rel="noreferrer noopener">https://docs.mongodb.com/manual/reference/operator/query/</a>. These must be URL encoded so that the query <code>{ title: { '$regex': '^lancashire surprise major', '$options': 'i' } }</code> becomes "https://vivacious-port.glitch.me/method?title%5B%24regex%5D=%5Elancashire+surprise+major&title%5B%24options%5D=i".
+  </p>
+    
+  </body>
+</html>

@@ -82,10 +82,11 @@ var arr = [
 
 //findFields("method", {query: q, fields: "title huntBells"}, (res) => console.log(res));
 //words(3);
+//
 
 app.get("/", function (request, response) {
-  console.log(request.query);
-  response.send('ok');
+  //console.log(request.query);
+  response.sendFile(__dirname + '/views/blank.html');
 });
 
 app.get("/worddata", function (request, response) {
